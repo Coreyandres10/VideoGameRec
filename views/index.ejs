@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video game recommendation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+       <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+        <div
+          class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
+        >
+          <a href="/" class="flex items-center">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Xbox-360-S-Controller.png"
+              class="h-6 mr-3 sm:h-9"
+              alt="Logo"
+            />
+            <span class="font-semibold text-xl tracking-tight"></span>
+              Recommendation</span
+            >
+          </a>
+          <div class="flex items-center">
+            <div class="hidden mt-2 mr-4 sm:inline-block">
+              <span></span>
+            </div>
+  
+            <button
+              data-collapse-toggle="mobile-menu-2"
+              type="button"
+              class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu-2"
+              aria-expanded="true"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+              <svg
+                class="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
+            id="mobile-menu-2"
+          >
+            <ul
+              class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+            >
+              <li>
+                <a
+                  href="/"
+                  class="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white"
+                  aria-current="page"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/login"
+                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Login</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="/profile"
+                  class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  >Profile</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div class="max-w-4xl p-10 bg-gray-100 mt-10 mx-auto">
+        <form id="searchForm" action="">
+          <div class="mb-6">
+
+            
+            
+
+            <input
+              id="first-title"
+              class="inline-block w-full p-4 leading-6 text-lg font-extrabold placeholder-indigo-900 bg-white shadow border-2 border-indigo-900 rounded"
+              type="text"
+              placeholder="Enter First Title"
+            />
+            <ul id="suggestions-first"></ul>
+          </div>
+          <div class="mb-6">
+            <input
+              id="sec-title"
+              class="inline-block w-full p-4 leading-6 text-lg font-extrabold placeholder-indigo-900 bg-white shadow border-2 border-indigo-900 rounded"
+              type="text"
+              placeholder="Enter Second Title"
+            />
+            <ul id="suggestions-sec"></ul>
+          </div>
+          <button
+            class="inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-green-400 border-3 border-indigo-900 shadow rounded transition duration-200"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+
+
+      <div class="max-w-6xl mx-auto mt-10" id="games">
+        <!-- Game cards will be appended here -->
+      </div>
+      
+      
+      
+      
+
+<script>
+
+
+const gameNameInput = document.getElementById('first-title');
+const suggestionsList = document.getElementById('suggestions-first');
+gameNameInput.addEventListener('input', async () => {
+  const searchTerm = gameNameInput.value;
+  const suggestions = await fetchSuggestions(searchTerm);
+
+  // Clear previous suggestions
+  suggestionsList.innerHTML = '';
+
+  // Display new suggestions
+  suggestions.forEach((suggestion) => {
+    const suggestionItem = document.createElement('li');
+    suggestionItem.textContent = suggestion.name;
+
+    suggestionItem.addEventListener('click', () => {
+      // Fill the input field with the clicked suggestion
+      gameNameInput.value = suggestion.name;
+      // Clear the suggestions list
+      suggestionsList.innerHTML = '';
+    });
+
+    suggestionsList.appendChild(suggestionItem);
+  });
+});
+
+
+
+
+const gameNameInputSec = document.getElementById('sec-title');
+const suggestionsListSec = document.getElementById('suggestions-sec');
+
+gameNameInputSec.addEventListener('input', async () => {
+  const searchTerm = gameNameInputSec.value;
+  const suggestions = await fetchSuggestions(searchTerm);
+
+  // Clear previous suggestions
+  suggestionsListSec.innerHTML = '';
+
+  // Display new suggestions
+  suggestions.forEach((suggestion) => {
+    const suggestionItem = document.createElement('li');
+    suggestionItem.textContent = suggestion.name;
+
+    suggestionItem.addEventListener('click', () => {
+      // Fill the input field with the clicked suggestion
+      gameNameInputSec.value = suggestion.name;
+      // Clear the suggestions list
+      suggestionsListSec.innerHTML = '';
+    });
+
+    suggestionsListSec.appendChild(suggestionItem);
+  });
+});
+
+async function fetchSuggestions(searchTerm) {
+  // Make a request to your server's /search-games endpoint
+  const response = await fetch('/search-games-title', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ searchTerm }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    console.error('API request failed');
+    return [];
+  }
+}
+
+
+        document.getElementById("searchForm").addEventListener("submit", async function (e) {
+          e.preventDefault(); // Prevent the form from submitting traditionally
+      
+          const firstTitle = document.getElementById("first-title").value;
+          const secTitle = document.getElementById("sec-title").value;
+      
+          try {
+            // Make an API request to search games
+            const response = await fetch("http://localhost:3000/search-games", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json", // Set the content type to JSON
+              },
+              body: JSON.stringify({
+                firstTitle,
+                secTitle,
+              }),
+            });
+      
+            if (response.ok) {
+              const data = await response.json();
+              // Handle the data and display the results in your UI
+              displayGameData(data);
+            } else {
+              console.error("API request failed");
+            }
+          } catch (error) {
+            console.error("An error occurred", error);
+          }
+        });
+      
+        function displayGameData(data) {
+  console.log(data);
+  const gamesContainer = document.getElementById('games');
+
+  data.forEach((game) => {
+    const gameUrl = document.createElement('a');
+    gameUrl.href = game.url; // Set the URL for the game
+    gameUrl.target = '_blank';
+
+    const gameCard = document.createElement('div');
+    gameCard.className = 'p-4'; // Adjust the width as needed
+
+    const innerCard = document.createElement('div');
+    innerCard.className = 'bg-white flex border rounded-xl overflow-hidden items-center';
+
+    const gameImage = document.createElement('div');
+    gameImage.className = 'relative w-32 h-32 flex-shrink-0';
+    const image = document.createElement('img');
+    image.className = 'absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50';
+    image.setAttribute('src', `https:${game.cover_url}`); // You can update this with the actual image URL
+    image.alt = game.name; // Set alt attribute to the game name
+    gameImage.appendChild(image);
+
+    const gameDetails = document.createElement('div');
+    gameDetails.className = 'flex flex-col gap-2 px-2 py-2';
+    const gameName = document.createElement('p');
+    gameName.className = 'text-xl font-bold';
+    gameName.textContent = game.name;
+
+    const gameSummary = document.createElement('p');
+    gameSummary.className = 'text-gray-500';
+    gameSummary.textContent = game.summary.slice(0, 150) + '...';
+
+    const gameRatings = document.createElement('p');
+    gameRatings.className = 'text-blue-500 font-bold';
+    gameRatings.textContent = `Ratings: ${Math.round(game.rating) || 'N/A'}`;
+
+    gameDetails.appendChild(gameName);
+    gameDetails.appendChild(gameSummary);
+    gameDetails.appendChild(gameRatings);
+
+    innerCard.appendChild(gameImage);
+    innerCard.appendChild(gameDetails);
+
+    gameUrl.appendChild(innerCard); // Wrap the innerCard with the gameUrl
+
+    gameCard.appendChild(gameUrl); // Append the gameUrl to the gameCard
+
+    gamesContainer.appendChild(gameCard);
+  });
+}
+
+
+      </script> 
+      
+   <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+  </body>
+</html>
